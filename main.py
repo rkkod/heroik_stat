@@ -1,11 +1,12 @@
+import os
 import pandas
 import json
 import telebot
 import subprocess
+from dotenv import load_dotenv
 
-#users = [868124242, 000000000]
-token = '6467012974:AAE6_XU_jQvcuE9_4Q_jDAZ3MikfgS5bgBg'
-bot = telebot.TeleBot(token)
+load_dotenv()
+bot = telebot.TeleBot(token=os.getenv('TOKEN'))
 
 data = pandas.read_excel('data.xlsx')
 date = list(map(str, data['date']))
