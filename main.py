@@ -32,14 +32,14 @@ def check_and_write_number(number):
         # Читаем содержимое файла и проверяем наличие числа
         existing_numbers = file.read().split()
         if str(number.from_user.id) in existing_numbers:
-            print("Число уже есть в файле")
+            print("Логин уже есть в файле")
             return
 
     # Открываем файл в режиме добавления (если файла нет, он будет создан)
     with open("white_list", "a") as file:
         # Записываем число в файл
-        file.write(str(number.from_user.id) + "\n")
-        print("Число успешно добавлено в файл")
+        file.write(str(number.from_user.id)+" "+str(number.from_user.first_name)+" "+str(number.from_user.username)+"\n")
+        print("Логин успешно добавлено в файл")
 
 @bot.message_handler(commands=['nik'])
 def info_user(message):
@@ -67,7 +67,7 @@ def nik_info(message):
         upload_nik_info(text)
         with open('res.json') as jf:
             infa_json = json.load(jf)
-            bot.send_message(message.chat.id, f'<b>{text}</b> \n '
+            bot.reply_to(message, f'<b>{text}</b> \n '
                                               f'<b>Дата                Герой   Урон    Коэф.</b>\n'
                                               f'{infa_json}', parse_mode='HTML')
 
